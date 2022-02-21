@@ -19,7 +19,6 @@ function httpAddLaunch(req, res) {
     !launch.launchDate ||
     !launch.target
   ) {
-    console.log(launch);
     return res.status(400).json({
       error: 'Missing required launch property',
     });
