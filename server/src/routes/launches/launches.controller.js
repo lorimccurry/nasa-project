@@ -1,7 +1,7 @@
 const res = require('express/lib/response');
 const {
   getLaunches,
-  addLaunch,
+  scheduleNewLaunch,
   existsLaunchWithId,
   abortLaunchById,
 } = require('../../models/launches.model');
@@ -10,7 +10,7 @@ async function httpGetLaunches(req, res) {
   return res.status(200).json(await getLaunches());
 }
 
-function httpAddLaunch(req, res) {
+async function httpAddLaunch(req, res) {
   const launch = req.body;
 
   if (
@@ -31,7 +31,7 @@ function httpAddLaunch(req, res) {
     });
   }
 
-  addLaunch(launch);
+  await scheduleNewLaunch(launch);
   return res.status(201).json(launch);
 }
 
